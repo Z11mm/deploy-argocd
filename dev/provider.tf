@@ -13,7 +13,7 @@ terraform {
 
   backend "gcs" {
     credentials = "./key.json"
-    # credentials = "${file("${var.gcp_credentials}")}"
+    # credentials = file(var.gcp_credentials)
     bucket      = "backend-bucket-tf"
   }
 }
