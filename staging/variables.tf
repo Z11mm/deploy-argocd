@@ -16,7 +16,7 @@ variable "gcp_credentials" {
 }
 
 variable "region" {
-  default     = "us-west1"
+  default     = "us-east1"
   description = "The default region for the project"
   type        = string
 }
@@ -28,7 +28,7 @@ variable "network_name" {
 }
 
 variable "environment" {
-  default     = "development"
+  default     = "staging"
   description = "The current working environment"
   type        = string
 }

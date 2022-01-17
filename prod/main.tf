@@ -15,14 +15,10 @@ module "vpc_network" {
   region      = var.region
 
   cidr_block           = var.vpc_cidr_block
-  # secondary_cidr_block = var.vpc_secondary_cidr_block
 
   public_subnetwork_secondary_range_name = var.public_subnetwork_secondary_range_name
   public_services_secondary_range_name   = var.public_services_secondary_range_name
   public_services_secondary_cidr_block   = var.public_services_secondary_cidr_block
-  # private_services_secondary_cidr_block  = var.private_services_secondary_cidr_block
-  # secondary_cidr_subnetwork_width_delta  = var.secondary_cidr_subnetwork_width_delta
-  # secondary_cidr_subnetwork_spacing      = var.secondary_cidr_subnetwork_spacing
 }
 
 # --------------------------------------------------------------------------------------
@@ -47,11 +43,11 @@ module "gke_cluster" {
   cluster_secondary_range_name = module.vpc_network.public_subnetwork_secondary_range_name
 
   # To make testing easier, we keep the public endpoint available. In production, we highly recommend restricting access to only within the network boundary, requiring your users to use a bastion host or VPN.
-  disable_public_endpoint = "false"
+  disable_public_endpoint = "true"
 
   # add resource labels to the cluster
   resource_labels = {
-    environment = "development"
+    environment = "production"
   }
 }
 
@@ -59,7 +55,6 @@ module "gke_cluster" {
 # CREATE NODE POOL
 #-------------------------------------------------------------------------------------
 resource "google_container_node_pool" "node-pool" {
-  # provider = google-beta
 
   name = "${module.gke_cluster.name}-node-pool"
   cluster = module.gke_cluster.name
@@ -77,9 +72,9 @@ resource "google_container_node_pool" "node-pool" {
   }
 
   node_config {
-    machine_type = "e2-micro"
+    machine_type = "e2-medium"
     service_account = module.gke_service_account.email
-    disk_size_gb = "20"
+    disk_size_gb = "30"
     disk_type    = "pd-standard"
     preemptible  = false
     oauth_scopes = [
