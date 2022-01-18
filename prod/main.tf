@@ -1,6 +1,7 @@
 # ---------------------------------------------------------------------------------------
 # CREATE VPC NETWORK
 # ---------------------------------------------------------------------------------------
+
 resource "random_string" "suffix" {
   length  = 4
   special = false
@@ -10,11 +11,11 @@ resource "random_string" "suffix" {
 module "vpc_network" {
   source = "github.com/gruntwork-io/terraform-google-network.git//modules/vpc-network?ref=v0.8.2"
 
-  name_prefix = "${var.cluster_name}-network-${random_string.suffix.result}"
+  name_prefix = "${var.cluster_name}-${random_string.suffix.result}-${var.environment}"
   project     = var.project
   region      = var.region
 
-  cidr_block           = var.vpc_cidr_block
+  cidr_block = var.vpc_cidr_block
 
   public_subnetwork_secondary_range_name = var.public_subnetwork_secondary_range_name
   public_services_secondary_range_name   = var.public_services_secondary_range_name
@@ -43,11 +44,11 @@ module "gke_cluster" {
   cluster_secondary_range_name = module.vpc_network.public_subnetwork_secondary_range_name
 
   # To make testing easier, we keep the public endpoint available. In production, we highly recommend restricting access to only within the network boundary, requiring your users to use a bastion host or VPN.
-  disable_public_endpoint = "true"
+  disable_public_endpoint = "false"
 
   # add resource labels to the cluster
   resource_labels = {
-    environment = "production"
+    environment = var.environment
   }
 }
 
@@ -55,10 +56,11 @@ module "gke_cluster" {
 # CREATE NODE POOL
 #-------------------------------------------------------------------------------------
 resource "google_container_node_pool" "node-pool" {
+  # provider = google-beta
 
-  name = "${module.gke_cluster.name}-node-pool"
-  cluster = module.gke_cluster.name
-  location = var.region
+  name       = "${module.gke_cluster.name}-node-pool"
+  cluster    = module.gke_cluster.name
+  location   = var.region
   node_count = 1
 
   autoscaling {
@@ -72,18 +74,17 @@ resource "google_container_node_pool" "node-pool" {
   }
 
   node_config {
-    machine_type = "e2-medium"
+    machine_type    = "e2-medium"
     service_account = module.gke_service_account.email
-    disk_size_gb = "30"
-    disk_type    = "pd-standard"
-    preemptible  = false
+    disk_size_gb    = "30"
+    disk_type       = "pd-standard"
+    preemptible     = false
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring"
     ]
   }
-
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

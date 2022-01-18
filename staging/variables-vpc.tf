@@ -1,7 +1,7 @@
 variable "vpc_cidr_block" {
   description = "The IP address range of the VPC in CIDR notation. A prefix of /16 is recommended. Do not use a prefix higher than /27."
   type        = string
-  default     = "10.5.0.0/16"
+  default     = "10.4.0.0/16"
 }
 
 variable "public_subnetwork_secondary_range_name" {

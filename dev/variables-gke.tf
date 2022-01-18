@@ -4,7 +4,7 @@
 # ------------------------------------------------------------
 
 variable "cluster_name" {
-  default     = "boutique-sample-01"
+  default     = "boutique-cluster"
   description = "The name of the gke cluster"
   type        = string
 }
@@ -16,7 +16,7 @@ variable "min_count" {
 }
 
 variable "max_count" {
-  default     = 5
+  default     = 2
   description = "The maximum number of nodes in the node pool"
   type        = number
 }

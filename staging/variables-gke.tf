@@ -4,7 +4,7 @@
 # ------------------------------------------------------------
 
 variable "cluster_name" {
-  default     = "boutique-sample-01"
+  default     = "boutique-cluster"
   description = "The name of the gke cluster"
   type        = string
 }
