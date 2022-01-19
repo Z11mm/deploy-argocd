@@ -40,3 +40,11 @@ The project folders are structured in such a way to have support for development
 * `variables.tf` for global variables
 * `variables-*` for variables that are resource-specific.
 * All resources are defined in `main.tf`
+
+### Usage
+To execute the scripts in each environment, within your terminal, run the following commands:
+
+* cd environment directory
+* Run `terraform init`
+* Run `terraform plan`
+* Run `terraform apply`
