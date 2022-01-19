@@ -6,7 +6,7 @@
 * [Usage]()
 
 ## Introduction
-These terraform scripts have been created using community modules. The scripts provision a public regional Kubernetes cluster on GCP.
+These terraform scripts have been created using community modules — the repo links to the modules are specified in the `source` arguments of resources defined in `main.tf`. The scripts provision a public regional Kubernetes cluster on GCP.
 
 ## Structure
 The project folders are structured in such a way to have support for development(`/dev`), staging(`/staging`) and production(`/prod`) environments.
