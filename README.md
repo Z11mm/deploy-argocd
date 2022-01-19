@@ -37,3 +37,6 @@ The project folders are structured in such a way to have support for development
     ├── variables-vpc.tf
     └── variables.tf
 ```
+* `variables.tf` for global variables
+* `variables-*` for variables that are resource-specific.
+* All resources are defined in `main.tf`
