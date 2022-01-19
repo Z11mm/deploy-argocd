@@ -5,10 +5,10 @@
 * [Structure](#structure)
 * [Usage]()
 
-### Introduction
+## Introduction
 These terraform scripts have been created using community modules. The scripts provision a regional Kubernetes cluster on GCP.
 
-### Structure
+## Structure
 The project folders are structured in such a way to have support for development(`/dev`), staging(`/staging`) and production(`/prod`) environments.
 
 ```
@@ -41,10 +41,10 @@ The project folders are structured in such a way to have support for development
 * `variables-*` for variables that are resource-specific.
 * All resources are defined in `main.tf`
 
-### Usage
+## Usage
 To execute the scripts in each environment, within your terminal, run the following commands:
 
-* cd environment directory
+* `cd environment directory`
 * Run `terraform init`
 * Run `terraform plan`
 * Run `terraform apply`
