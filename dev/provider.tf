@@ -13,25 +13,29 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "~> 2.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 1.1.1"
+    }
   }
 
   backend "gcs" {
     credentials = "./key.json"
     # credentials = file(var.gcp_credentials)
-    bucket      = "backend-bucket-tf"
+    bucket = "backend-bucket-tf"
   }
 }
 
 provider "google" {
-  credentials = "${var.gcp_credentials}"
-  project     = "${var.project_id}"
-  region      = "${var.region}"
+  credentials = var.gcp_credentials
+  project     = var.project_id
+  region      = var.region
 }
 
 provider "google-beta" {
-  credentials = "${var.gcp_credentials}"
-  project     = "${var.project_id}"
-  region      = "${var.region}"
+  credentials = var.gcp_credentials
+  project     = var.project_id
+  region      = var.region
 }
 
 # ---------
@@ -43,4 +47,12 @@ provider "kubernetes" {
   host                   = "https://${module.gke.endpoint}"
   token                  = data.google_client_config.default.access_token
   cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = "https://${module.gke.endpoint}"
+    token                  = data.google_client_config.default.access_token
+    cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+  }
 }

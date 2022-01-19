@@ -52,9 +52,9 @@ module "gke_cluster" {
   }
 }
 
-#--------------------------------------------------------------------------------------
-# CREATE NODE POOL
-#-------------------------------------------------------------------------------------
+# #--------------------------------------------------------------------------------------
+# # CREATE NODE POOL
+# #-------------------------------------------------------------------------------------
 resource "google_container_node_pool" "node-pool" {
   # provider = google-beta
 
@@ -74,7 +74,7 @@ resource "google_container_node_pool" "node-pool" {
   }
 
   node_config {
-    machine_type    = "e2-micro"
+    machine_type    = "e2-standard-2"
     service_account = module.gke_service_account.email
     disk_size_gb    = "20"
     disk_type       = "pd-standard"
@@ -99,4 +99,10 @@ module "gke_service_account" {
   name        = "${var.cluster_service_account_name}-${var.environment}"
   project     = var.project
   description = var.cluster_service_account_description
+}
+
+resource "google_project_iam_member" "deimos-gcp-explore-01" {
+  project = var.project_id
+  role    = "roles/editor"
+  member  = "serviceAccount:gke-cluster-sa-development@deimos-gcp-explore-01-333007.iam.gserviceaccount.com"
 }
