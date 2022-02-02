@@ -32,7 +32,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = var.gcp_credentials
+  # credentials = var.gcp_credentials
   project     = var.project_id
   region      = var.region
 }
