@@ -11,7 +11,7 @@ resource "random_string" "suffix" {
 module "vpc_network" {
   source = "github.com/gruntwork-io/terraform-google-network.git//modules/vpc-network?ref=v0.8.2"
 
-  name_prefix = "${var.cluster_name}-${random_string.suffix.result}-${var.environment}"
+  name_prefix = "${var.network}-${random_string.suffix.result}-${var.environment}"
   project     = var.project
   region      = var.region
 

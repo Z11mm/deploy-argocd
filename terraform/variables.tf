@@ -21,7 +21,7 @@ variable "region" {
   type        = string
 }
 
-variable "network_name" {
+variable "network" {
   default     = "gke-cluster-vpc"
   description = "The name of the vpc network"
   type        = string
