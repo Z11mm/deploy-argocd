@@ -18,6 +18,6 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
 
-    # - name: Unlock State
-    #   id: unlock-state
-    #   run: terraform force-unlock 1643816757799207
+    - name: Remove Infrastructure
+      id: destroy-terraform
+      run: terraform destroy
