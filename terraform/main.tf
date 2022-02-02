@@ -30,7 +30,7 @@ module "gke_cluster" {
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
   source = "/github.com/Z11mm/terraform-google-kubernetes-engine/"
-  # version = "19.0.0"
+  version = "19.0.0"
 
   region                     = var.region
   ip_range_pods              = var.ip_range_pods
