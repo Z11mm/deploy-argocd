@@ -74,11 +74,11 @@ provider "helm" {
 #------------
 
 data "kubectl_file_documents" "namespace" {
-  content = file("../argocd-manifests/namespace.yaml")
+  content = file("../manifests/argocd/namespace.yaml")
 }
 
 data "kubectl_file_documents" "argocd" {
-  content = file("../argocd-manifests/install.yaml")
+  content = file("../manifests/argocd/install.yaml")
 }
 
 data "kubectl_file_documents" "my-boutique-app" {
