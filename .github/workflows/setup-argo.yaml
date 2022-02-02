@@ -11,11 +11,13 @@ jobs:
     - name: Install Terraform
       id: install-terraform
       run: wget -O terraform.zip https://releases.hashicorp.com/terraform/0.15.3/terraform_0.15.3_linux_amd64.zip && unzip terraform.zip && chmod +x terraform && sudo mv terraform /usr/local/bin
-    - name: Unlock State
-      id: unlock-state
-      run: terraform force-unlock 1643816757799207
+    
     - name: Apply Terraform
       id: apply-terraform
       run: sed -i "s/<project-id>/${{ secrets.PROJECT_ID }}/g" main.tf && terraform init && terraform apply -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+
+    - name: Unlock State
+      id: unlock-state
+      run: terraform force-unlock 1643816757799207
