@@ -17,6 +17,11 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 1.1.1"
     }
+
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = ">= 1.7.0"
+    }
   }
 
   backend "gcs" {
@@ -36,6 +41,13 @@ provider "google-beta" {
   credentials = var.gcp_credentials
   project     = var.project_id
   region      = var.region
+}
+
+provider "kubectl" {
+  host                   = module.gke_auth.host
+  cluster_ca_certificate = module.gke_auth.cluster_ca_certificate
+  token                  = module.gke_auth.token
+  load_config_file       = false
 }
 
 # ---------

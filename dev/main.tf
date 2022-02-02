@@ -87,6 +87,20 @@ resource "google_container_node_pool" "node-pool" {
   }
 }
 
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [module.gke_cluster]
+  create_duration = "30s"
+}
+
+module "gke_auth" {
+  depends_on           = [time_sleep.wait_30_seconds]
+  source               = "terraform-google-modules/kubernetes-engine/google//modules/auth"
+  project_id           = var.project_id
+  cluster_name         = module.gke_cluster.name
+  location             = var.region
+  use_private_endpoint = false
+}
+
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A CUSTOM SERVICE ACCOUNT TO USE WITH THE GKE CLUSTER
 # ---------------------------------------------------------------------------------------------------------------------
