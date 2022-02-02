@@ -56,16 +56,16 @@ provider "kubectl" {
 data "google_client_config" "default" {}
 
 provider "kubernetes" {
-  host                   = "https://${module.gke.endpoint}"
+  host                   = "https://${module.gke_cluster.endpoint}"
   token                  = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+  cluster_ca_certificate = base64decode(module.gke_cluster.ca_certificate)
 }
 
 provider "helm" {
   kubernetes {
-    host                   = "https://${module.gke.endpoint}"
+    host                   = "https://${module.gke_cluster.endpoint}"
     token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+    cluster_ca_certificate = base64decode(module.gke_cluster.ca_certificate)
   }
 }
 
