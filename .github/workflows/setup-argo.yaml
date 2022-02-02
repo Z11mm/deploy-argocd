@@ -14,7 +14,7 @@ jobs:
     
     - name: Apply Terraform
       id: apply-terraform
-      run: sed -i "s/<project-id>/${{ secrets.PROJECT_ID }}/g" main.tf && terraform init && terraform force-unlock 1643816757799207 -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
+      run: sed -i "s/<project-id>/${{ secrets.PROJECT_ID }}/g" main.tf && terraform init && terraform force-unlock -force 1643816757799207 && terraform apply -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
 
