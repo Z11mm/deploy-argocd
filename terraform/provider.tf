@@ -86,26 +86,26 @@ data "kubectl_file_documents" "my-boutique-app" {
   content = file("../manifests/argocd/boutique-crd.yaml")
 }
 
-resource "kubectl_manifest" "namespace" {
-  count              = length(data.kubectl_file_documents.namespace.documents)
-  yaml_body          = element(data.kubectl_file_documents.namespace.documents, count.index)
-  override_namespace = "argocd"
-}
+# resource "kubectl_manifest" "namespace" {
+#   count              = length(data.kubectl_file_documents.namespace.documents)
+#   yaml_body          = element(data.kubectl_file_documents.namespace.documents, count.index)
+#   override_namespace = "argocd"
+# }
 
-resource "kubectl_manifest" "argocd" {
-  depends_on = [
-    kubectl_manifest.namespace,
-  ]
-  count              = length(data.kubectl_file_documents.argocd.documents)
-  yaml_body          = element(data.kubectl_file_documents.argocd.documents, count.index)
-  override_namespace = "argocd"
-}
+# resource "kubectl_manifest" "argocd" {
+#   depends_on = [
+#     kubectl_manifest.namespace,
+#   ]
+#   count              = length(data.kubectl_file_documents.argocd.documents)
+#   yaml_body          = element(data.kubectl_file_documents.argocd.documents, count.index)
+#   override_namespace = "argocd"
+# }
 
-resource "kubectl_manifest" "my-boutique-app" {
-  depends_on = [
-    kubectl_manifest.argocd,
-  ]
-  count              = length(data.kubectl_file_documents.my-boutique-app.documents)
-  yaml_body          = element(data.kubectl_file_documents.my-boutique-app.documents, count.index)
-  override_namespace = "argocd"
-}
+# resource "kubectl_manifest" "my-boutique-app" {
+#   depends_on = [
+#     kubectl_manifest.argocd,
+#   ]
+#   count              = length(data.kubectl_file_documents.my-boutique-app.documents)
+#   yaml_body          = element(data.kubectl_file_documents.my-boutique-app.documents, count.index)
+#   override_namespace = "argocd"
+# }
