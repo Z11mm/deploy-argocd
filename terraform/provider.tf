@@ -25,7 +25,7 @@ terraform {
   }
 
   backend "gcs" {
-    credentials = "${ secrets.GOOGLE_CREDENTIALS }" 
+    # credentials = "${ secrets.GOOGLE_CREDENTIALS }" 
     # credentials = file(var.gcp_credentials)
     bucket = "backend-bucket-tf"
   }
