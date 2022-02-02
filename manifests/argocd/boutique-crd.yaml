@@ -26,4 +26,3 @@ spec:
     # Enable automatic sync - prevent direct changes to the cluster(selfHeal) and delete files in repo when deleted in cluster(prune)
     automated:
       selfHeal: true
-      prune: false
