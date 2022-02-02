@@ -45,7 +45,7 @@ module "gke_cluster" {
   # We're deploying the cluster in the 'public' subnetwork to allow outbound internet access
   # See the network access tier table for full details:
   # https://github.com/gruntwork-io/terraform-google-network/tree/master/modules/vpc-network#access-tier
-  network                      = module.vpc_network.network
+  network                      = "${var.network}-${random_string.suffix.result}-${var.environment}"
   subnetwork                   = module.vpc_network.public_subnetwork
   # cluster_secondary_range_name = module.vpc_network.public_subnetwork_secondary_range_name
 
