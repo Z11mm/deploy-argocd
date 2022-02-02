@@ -114,7 +114,7 @@ resource "google_container_node_pool" "node-pool" {
   }
 
   node_config {
-    machine_type    = "e2-standard-4"
+    machine_type    = "e2-standard-2"
     service_account = module.gke_service_account.email
     disk_size_gb    = "20"
     disk_type       = "pd-standard"
