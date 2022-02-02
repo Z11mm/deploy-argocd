@@ -53,9 +53,9 @@ module "gke_cluster" {
   # disable_public_endpoint = "false"
 
   # add resource labels to the cluster
-  resource_labels = {
-    environment = var.environment
-  }
+  # resource_labels = {
+  #   environment = var.environment
+  # }
 }
 
 # #--------------------------------------------------------------------------------------
