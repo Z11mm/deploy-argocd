@@ -29,12 +29,13 @@ module "gke_cluster" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
-  source = "https://github.com/terraform-google-modules/terraform-google-kubernetes-engine.git"
+  source = "terraform-google-modules/kubernetes-engine/google"
+  version = "19.0.0"
 
   region                     = var.region
   # zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
-  ip_range_pods              = "us-central1-01-gke-01-pods"
-  ip_range_services          = "us-central1-01-gke-01-services"
+  ip_range_pods              = var.ip_range_pods
+  ip_range_services          = var.ip_range_services
   http_load_balancing        = false
   # horizontal_pod_autoscaling = true
   name = "${var.cluster_name}-${var.environment}"
