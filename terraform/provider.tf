@@ -107,5 +107,5 @@ resource "kubectl_manifest" "my-boutique-app" {
   ]
   count              = length(data.kubectl_file_documents.my-boutique-app.documents)
   yaml_body          = element(data.kubectl_file_documents.my-boutique-app.documents, count.index)
-  override_namespace = "boutique-app"
+  override_namespace = "argocd"
 }
