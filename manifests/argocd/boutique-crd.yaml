@@ -16,12 +16,12 @@ spec:
   destination:
     # endpoint for k8s api server/target k8s cluster. If namespace doesn't exist, argocd creates it.
     server: https://kubernetes.default.svc
-    namespace: boutique-app   
+    namespace: default  
 
   # Configure argocd to create the namespace specified in destination
   syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
+    # syncOptions:
+    # - CreateNamespace=true
 
     # Enable automatic sync - prevent direct changes to the cluster(selfHeal) and delete files in repo when deleted in cluster(prune)
     automated:
