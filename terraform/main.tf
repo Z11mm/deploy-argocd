@@ -38,7 +38,7 @@ module "gke_cluster" {
   ip_range_services          = var.ip_range_services
   http_load_balancing        = false
   # horizontal_pod_autoscaling = true
-  name = "${var.cluster_name}-${var.environment}"
+  name = "${var.cluster_name}"
 
   project_id  = var.project
 
