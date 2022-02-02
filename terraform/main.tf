@@ -29,8 +29,8 @@ module "gke_cluster" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   # source = "github.com/gruntwork-io/terraform-google-gke.git//modules/gke-cluster?ref=v0.2.0"
-  source = "terraform-google-modules/kubernetes-engine/google"
-  version = "19.0.0"
+  source = "/github.com/Z11mm/terraform-google-kubernetes-engine.git/"
+  # version = "19.0.0"
 
   region                     = var.region
   # zones                      = ["us-central1-a", "us-central1-b", "us-central1-f"]
