@@ -128,7 +128,7 @@ resource "google_container_node_pool" "node-pool" {
 }
 
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [module.gke_cluster]
+  depends_on = [google_container_cluster.main]
   create_duration = "30s"
 }
 
