@@ -17,7 +17,3 @@ jobs:
       run: sed -i "s/<project-id>/${{ secrets.PROJECT_ID }}/g" main.tf && terraform init && terraform apply -auto-approve -var="project_id=${{ secrets.PROJECT_ID  }}"
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
-
-    - name: Remove Infrastructure
-      id: destroy-terraform
-      run: terraform destroy

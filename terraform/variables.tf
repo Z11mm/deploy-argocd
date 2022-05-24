@@ -4,31 +4,26 @@
 # ------------------------------------------------------------
 
 variable "project_id" {
-  default     = "deimos-gcp-explore-01-333007"
   description = "The id of the target project to provision infrastructure"
   type        = string
 }
 
 variable "gcp_credentials" {
-  default     = "./key.json"
   description = "The path for the service account private key file"
   type        = string
 }
 
 variable "region" {
-  default     = "us-west1"
   description = "The default region for the project"
   type        = string
 }
 
 variable "network" {
-  default     = "gke-cluster-vpc"
   description = "The name of the vpc network"
   type        = string
 }
 
 variable "environment" {
-  default     = "development"
   description = "The current working environment"
   type        = string
 }
